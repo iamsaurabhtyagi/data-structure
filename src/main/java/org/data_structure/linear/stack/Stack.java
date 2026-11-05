@@ -18,9 +18,6 @@ public class Stack<T> {
         if(initialCapacity <= 0)
             throw new IllegalArgumentException("capacity must be greater than zero");
 
-
-
-
         items = (T[]) new Object[initialCapacity];
     }
 
