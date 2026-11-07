@@ -53,8 +53,39 @@ public class LinkedList<E> {
         root = previous;
     }
 
+    public int size() {
+        var size = 0;
+        var current = root;
+
+        while (current != null) {
+            size++;
+            current = current.next;
+        }
+
+        return size;
+    }
+
+    public void clear() {
+        root = null;
+    }
+
+    public boolean contains(E element) {
+
+        var current = root;
+        while (current != null) {
+            if(Objects.equals(element, current.value))
+                return true;
+            current = current.next;
+        }
+        return false;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
+    }
+
     public String toString() {
         Stream<E> nodeStream = Stream.iterate(root, Objects::nonNull, current -> current.next).map(node -> node.value);
-        return nodeStream.map(Object::toString).collect(Collectors.joining(", ", "[", "]"));
+        return nodeStream.map(String::valueOf).collect(Collectors.joining(", ", "[", "]"));
     }
 }
