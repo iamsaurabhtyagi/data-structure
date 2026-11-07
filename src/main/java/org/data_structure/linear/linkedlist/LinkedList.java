@@ -1,6 +1,9 @@
 package org.data_structure.linear.linkedlist;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LinkedList<E> {
     private static class Node<E> {
@@ -34,5 +37,24 @@ public class LinkedList<E> {
         var element = root.value;
         root = root.next;
         return element;
+    }
+
+    public void reverse() {
+        Node<E> previous = null;
+        var current = root;
+        Node<E> next;
+
+        while(current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        root = previous;
+    }
+
+    public String toString() {
+        Stream<E> nodeStream = Stream.iterate(root, Objects::nonNull, current -> current.next).map(node -> node.value);
+        return nodeStream.map(Object::toString).collect(Collectors.joining(", ", "[", "]"));
     }
 }
