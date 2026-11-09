@@ -84,6 +84,55 @@ public class LinkedList<E> {
         return root == null;
     }
 
+    public int indexOf(E element) {
+        int index = -1;
+        var current = root;
+        while (current != null) {
+            index++;
+
+            if(Objects.equals(element, current.value))
+                return index;
+            current = current.next;
+        }
+
+        return -1;
+    }
+
+    public E get(int index) {
+        if(index < 0)
+            throw new IllegalArgumentException("Invalid Input");
+        if(root == null)
+            throw new NoSuchElementException("Empty List");
+
+        var current = root;
+        var pointer = 0;
+
+        while (current != null) {
+            if(pointer == index)
+                return current.value;
+            pointer++;
+            current = current.next;
+        }
+        return null;
+    }
+
+    public void set(int index, E element) {
+        if(index < 0)
+            throw new IllegalArgumentException("Invalid Input");
+        if(root == null)
+            throw new NoSuchElementException("Empty List");
+
+        var current = root;
+        var pointer = 0;
+        while (current != null) {
+            if(pointer == index)
+                current.value = element;
+
+            pointer++;
+            current = current.next;
+        }
+    }
+
     public String toString() {
         Stream<E> nodeStream = Stream.iterate(root, Objects::nonNull, current -> current.next).map(node -> node.value);
         return nodeStream.map(String::valueOf).collect(Collectors.joining(", ", "[", "]"));

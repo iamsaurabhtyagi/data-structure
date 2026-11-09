@@ -31,5 +31,8 @@ public class MainApp {
         list.add(80);
         System.out.println(list);
         System.out.println("Contains: " + list.contains(null));
+
+        var index = list.indexOf(80);
+        System.out.println("Index: " + index);
     }
 }
