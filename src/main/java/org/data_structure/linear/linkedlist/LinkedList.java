@@ -113,7 +113,7 @@ public class LinkedList<E> {
             pointer++;
             current = current.next;
         }
-        return null;
+        throw new ArrayIndexOutOfBoundsException("Element does not exist");
     }
 
     public void set(int index, E element) {
@@ -125,9 +125,10 @@ public class LinkedList<E> {
         var current = root;
         var pointer = 0;
         while (current != null) {
-            if(pointer == index)
+            if(pointer == index) {
                 current.value = element;
-
+                break;
+            }
             pointer++;
             current = current.next;
         }
